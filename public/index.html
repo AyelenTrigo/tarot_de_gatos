@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="/image/logo.jpg">
+    <title>Tarot de Gatos 🐱</title>
+  </head>
+  <body>
+    <header class="card-header">
+      Tarot de Gatos
+      <button id="ayuda">?</button>
+    </header>
+    <section id="mostrarAyuda" class="container">
+      <div class="mostrarAyuda">
+        <button id="cerrarAyuda">x</button>
+        <p>
+          Entra en este juego de 22 cartas que reproducen los arcanos mayores
+          del tarot en forma de gatos.
+        </p>
+        <p>
+          Las cartas de este Tarot pertenecen a "El Tarot de los GATOS" de
+          Alejandro Jodorowsky y Christian Gaudin.
+        </p>
+        <p>
+          Es esta reversión para web, el juego le asigna 3 cartas al azar a cada
+          jugador, luego hace una descripción breve de cada carta, y finalmente
+          muestra si los jugadores son compatibles o no.
+        </p>
+        <p>¡Mucha suerte!</p>
+      </div>
+    </section>
+    <section id="paginaInicio" class="container">
+      <div class="m-3">
+        <label for="inputJ1" class="form-label">Jugador 1</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputJ1"
+          placeholder="Ingrese nombre"
+          data-input="input"
+        />
+      </div>
+      <div class="m-3">
+        <label for="inputJ2" class="form-label">Jugador 2</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputJ2"
+          placeholder="Ingrese nombre"
+        />
+      </div>
+      <button type="submit" class="btn m-3" id="voyATenerSuerte">
+        Voy a tener suerte
+      </button>
+      <div id="validacion" class="text-center m-3" style="display: none">
+        <p>Por favor, escribí el nombre de ambos jugadores</p>
+      </div>
+    </section>
+    <section id="animacion" class="container">
+      <div class="animacion">
+        <img src="./image/gif.gif" alt="" />
+      </div>
+    </section>
+
+    <section id="resultadoDeCartas" class="container" style="display: none">
+      <div
+        id="carouselExampleDark"
+        class="carousel carousel-dark slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="3"
+            aria-label="Slide 4"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="4"
+            aria-label="Slide 5"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleDark"
+            data-bs-slide-to="5"
+            aria-label="Slide 6"
+          ></button>
+        </div>
+        <!-- CAROUSELL CON LOS RESULTADOS DE LAS CARTAS -->
+        <div class="irAResultados">
+          <button id="irAResultados">x</button>
+        </div>
+        <div class="carousel-inner" id="carouselTiradas">
+          <div class="carousel-item active">
+            <div class="centrar">
+              <h5 class="titulo">Carta 1/3 de</h5>
+              <h5 id="jugador1_1"></h5>
+            </div>
+            <div class="fotoCarta">
+              <img id="img0" src="" class="d-block w-100 img" />
+            </div>
+            <div class="carousel-caption d-md-block">
+              <h5 id="nombreCarta0"></h5>
+              <p id="detalleCarta0"></p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="centrar">
+              <h5 class="titulo">Carta 2/3 de</h5>
+              <h5 id="jugador1_2"></h5>
+            </div>
+            <div class="fotoCarta">
+              <img id="img1" src="" class="d-block w-100 img" />
+            </div>
+            <div class="carousel-caption d-md-block">
+              <h5 id="nombreCarta1"></h5>
+              <p id="detalleCarta1"></p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="centrar">
+              <h5 class="titulo">Carta 3/3 de</h5>
+              <h5 id="jugador1_3"></h5>
+            </div>
+            <div class="fotoCarta">
+              <img id="img2" src="" class="d-block w-100 img" />
+            </div>
+            <div class="carousel-caption d-md-block">
+              <h5 id="nombreCarta2"></h5>
+              <p id="detalleCarta2"></p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="centrar">
+              <h5 class="titulo">Carta 1/3 de</h5>
+              <h5 id="jugador2_1"></h5>
+            </div>
+            <div class="fotoCarta">
+              <img id="img3" src="" class="d-block w-100 img" />
+            </div>
+            <div class="carousel-caption d-md-block">
+              <h5 id="nombreCarta3"></h5>
+              <p id="detalleCarta3"></p>
+            </div>
+          </div>
+
+          `
+          <div class="carousel-item">
+            <div class="centrar">
+              <h5 class="titulo">Carta 2/3 de</h5>
+              <h5 id="jugador2_2"></h5>
+            </div>
+            <div class="fotoCarta">
+              <img id="img4" src="" class="d-block w-100 img" />
+            </div>
+            <div class="carousel-caption d-md-block">
+              <h5 id="nombreCarta4"></h5>
+              <p id="detalleCarta4"></p>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="centrar">
+              <h5 class="titulo">Carta 3/3 de</h5>
+              <h5 id="jugador2_3"></h5>
+            </div>
+            <div class="fotoCarta">
+              <img id="img5" src="" class="d-block w-100 img" />
+            </div>
+            <div class="carousel-caption d-md-block">
+              <h5 id="nombreCarta5"></h5>
+              <p id="detalleCarta5"></p>
+            </div>
+          </div>
+        </div>
+
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="muchosBotones">
+      <div class="container botones">
+        <button id="verResultados" type="button" class="btn m-3 p-3">
+          Ver resultados
+        </button>
+        <button id="volverATirar" type="button" class="btn m-3 p-3">
+          Volver a tirar
+        </button>
+        <!-- <button id="inicio" class="btn m-3 p-3">Volver al inicio</button> -->
+      </div>
+    </section>
+
+    <section id="paginaMatch">
+      <h5 id="jugador1"></h5>
+      <div class="centrar">
+        <div id="carta1"></div>
+        <div id="carta2"></div>
+        <div id="carta3"></div>
+      </div>
+      <h5 id="jugador2"></h5>
+      <div class="centrar">
+        <div id="carta4"></div>
+        <div id="carta5"></div>
+        <div id="carta6"></div>
+      </div>
+      <h5 class="hayMatch">¿Hay Match?</h5>
+      <h5 id="hayMatch"></h5>
+      <div class="botones">
+        <button id="guardar" class="btn m-3 p-3">Guardar</button>
+        <button id="salir" class="btn m-3 p-3">Salir</button>
+      </div>
+    </section>
+
+    <section id="resultadosAnteriores" class="m-3">Juegos anteriores</section>
+
+    <script
+      src="https:cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/js/arcanos.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+  </body>
+</html>
